@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--link to css-->
+	<link rel="stylesheet" href="payment.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+	<div class="row">
+	  <div id="col-75" class="col-75">
+		<div class="container">
+		  <form>
+		  
+			<div class="row">
+			  <div class="col-50">
+				<h3>Billing Address</h3>
+				<label for="fname"><i class="fa fa-user"></i> Full Name</label>
+				<input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+				<label for="email"><i class="fa fa-envelope"></i> Email</label>
+				<input type="text" id="email" name="email" placeholder="john@example.com">
+				<label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+				<input type="text" id="adr" name="address" placeholder="1 Orchard Road">
+				<label for="city"><i class="fa fa-institution"></i> City</label>
+				<input type="text" id="city" name="city" placeholder="Singapore">
+
+				<div class="row">
+				  <div class="col-50">
+					<label for="state">State</label>
+					<input type="text" id="state" name="state" placeholder="SG">
+				  </div>
+				  <div class="col-50">
+					<label for="zip">Zip</label>
+					<input type="text" id="zip" name="zip" placeholder="238879">
+				  </div>
+				</div>
+			  </div>
+
+			  <div class="col-50">
+				<h3>Payment</h3>
+				<label for="fname">Accepted Cards</label>
+				<div class="icon-container">
+				  <i class="fa fa-cc-visa" style="color:navy;"></i>
+				  <i class="fa fa-cc-amex" style="color:blue;"></i>
+				  <i class="fa fa-cc-mastercard" style="color:red;"></i>
+				  <i class="fa fa-cc-discover" style="color:orange;"></i>
+				</div>
+				<label for="cname">Name on Card</label>
+				<input type="text" id="cname" name="cardname" placeholder="John More Doe">
+				<label for="ccnum">Credit card number</label>
+				<input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+				<label for="expmonth">Exp Month</label>
+				<input type="text" id="expmonth" name="expmonth" placeholder="September">
+				<div class="row">
+				  <div class="col-50">
+					<label for="expyear">Exp Year</label>
+					<input type="text" id="expyear" name="expyear" placeholder="2024">
+				  </div>
+				  <div class="col-50">
+					<label for="cvv">CVV</label>
+					<input type="text" id="cvv" name="cvv" placeholder="352">
+				  </div>
+				</div>
+			  </div>
+			  
+			</div>
+			<button id="pay" class="btn">Proceed to Payment</button>
+		  </form>
+		</div>
+	  </div>
+		<div class="col-25">
+		<div class="container">
+		<h4 id="carName">Car Name</h4></h4>
+		<p>Total <span id="total" class="price">$0</span></p>
+		<p>Pick-Up Date <span id="pickup" class="price">$</span></p>
+		<p>Location <span id="pickupLocation" class="price">$</span></p>
+		<p>Rental Duration <span id="rentalDuration" class="price"></span></p>
+		<button id="proceedToSummary" class="btn">Proceed to Summary</button>
+		
+		
+		</div>
+
+	  </div>
+	</div>
+
+
+	<script>
+		// Get the car name and total from the URL
+		const urlParams = new URLSearchParams(window.location.search);
+		const carName = urlParams.get("carName");
+		const total = urlParams.get("total");
+		const pickup = urlParams.get("pickup");
+		const pickupLocation = urlParams.get("location"); 
+		const days = parseInt(urlParams.get("days"));
+		const weeks = parseInt(urlParams.get("weeks"));
+		const months = parseInt(urlParams.get("months"));
+
+		// Calculate the total rental duration
+		const rentalDuration = `${days} days, ${weeks} weeks, ${months} months`;
+		
+		 // Calculate the due date based on the rental duration
+        const pickupDate = new Date(pickup);
+        pickupDate.setDate(pickupDate.getDate() + (days + weeks * 7 + months * 30));
+        const dueDate = pickupDate.toDateString();
+
+		// Update the HTML elements on the payment page with the retrieved values
+		document.getElementById("carName").textContent = carName;
+		document.getElementById("total").textContent = total;
+		document.getElementById("pickup").textContent = pickup;
+		document.getElementById("pickupLocation").textContent = pickupLocation;
+		document.getElementById("rentalDuration").textContent = rentalDuration;
+		
+		document.getElementById("proceedToSummary").addEventListener("click", function () {
+            // Set up the URL with the carName, total, and dueDate as query parameters
+            const carNameParam = encodeURIComponent(carName);
+            const totalParam = encodeURIComponent(total);
+            const dueDateParam = encodeURIComponent(dueDate);
+            const summaryUrl = `summary.html?carName=${carNameParam}&total=${totalParam}&dueDate=${dueDateParam}&pickupLocation=${pickupLocation}`;
+            window.location.href = summaryUrl;
+        });
+		
+		// Event listener for payment button
+document.getElementById("pay").addEventListener("click", function () {
+    const paymentConfirmed = window.confirm("Payment was successful. Click OK to close.");
+    if (paymentConfirmed) {
+        // Close the col-75 section
+        document.getElementById("col-75").style.display = "none";
+    }
+});
+	</script>
+
+</body>
+</html>

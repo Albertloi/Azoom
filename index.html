@@ -1,0 +1,547 @@
+<!DOC<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device=width, initial-scale=1" />
+    <title>AZoom Car Rentel</title>
+    <!--link to css-->
+    <link rel="stylesheet" href="index.css" />
+    <!--box icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+  </head>
+  <body>
+
+  
+    <!-- header-->
+    <header>
+        <a href="index.html#home" class="logo">
+            <img src="img/logo.png" alt="">
+        </a>
+
+        <div class="bx bx-menu" id="menu-icon"></div>
+
+        <ul class="navbar">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#ride">Rent</a></li>
+            <li><a href="index.html#services">Cars</a></li>
+            <li><a href="index.html#reviews">Reviews</a></li>
+            <li><a href="index.html#locate">Locations</a></li>
+            
+        </ul>
+		<li><button id="loginBtn">Sign In</button></li>
+		
+		<!-- Login/Signup form (initially hidden) -->
+        <div class="login-form" id="loginForm">
+            <span class="close-button" onclick="closeForm()">&times;</span>
+            <form id="loginFormContent">
+                <h2>Sign In</h2>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Log In</button>
+            </form>
+            <div class="toggle-button" id="toggleButton">
+                <p>Don't have an account? <a href="#" onclick="showSignUpForm()">Sign Up</a></p>
+            </div>
+        </div>
+		<!-- Signup form (initially hidden) -->
+        <div class="login-form" id="signupForm" style="display: none;">
+			<span class="close-button" onclick="closeForm()">&times;</span>
+			<form id="signupFormContent">
+				<h2>Sign Up</h2>
+				<label for="newUsername">New Username:</label>
+				<input type="text" id="newUsername" name="newUsername" required>
+
+				<label for="newPassword">New Password:</label>
+				<input type="password" id="newPassword" name="newPassword" required>
+
+				<button type="submit">Sign Up</button>
+			</form>
+			<div class="toggle-button" id="toggleButton">
+				<p>Already have an account? <a href="#" onclick="showLoginForm()">Sign In</a></p>
+			</div>
+		</div>
+       
+	   <div id="userDisplay" class="user-display" style="display: none;"></div>
+    </header>
+	
+	<script>
+	// Function to open the login form
+    document.getElementById("loginBtn").addEventListener("click", function () {
+        document.getElementById("loginForm").style.display = "block";
+        document.getElementById("signupForm").style.display = "none";
+    });
+
+    // Function to show the sign-up form
+    function showSignUpForm() {
+        document.getElementById("loginFormContent").style.display = "none";
+        document.getElementById("signupForm").style.display = "block";
+    }
+
+    // Function to show the login form
+    function showLoginForm() {
+        document.getElementById("loginFormContent").style.display = "block";
+        document.getElementById("signupForm").style.display = "none";
+    }
+
+    // Function to close the form
+    function closeForm() {
+        document.getElementById("loginForm").style.display = "none";
+        document.getElementById("loginFormContent").style.display = "block";
+        document.getElementById("signupForm").style.display = "none";
+    }
+	
+	const users = [
+	  { username: "john", password: "password1" },
+	  { username: "user2", password: "password2" },
+	];
+
+	let currentUser = null; // This will store the logged-in user.
+	
+	// Function to update the header when a user logs in
+	function updateHeader() {
+    if (currentUser) {
+        // Hide the login button and show the username
+        document.getElementById("loginBtn").style.display = "none";
+        document.getElementById("userDisplay").style.display = "block";
+
+        // Display the logged-in username
+        document.getElementById("userDisplay").textContent = "Welcome: " + currentUser.username;
+	} else {
+        // Show the login button and hide the username
+        document.getElementById("loginBtn").style.display = "block";
+        document.getElementById("userDisplay").style.display = "none";
+		}
+	}
+	
+	// Function to log in
+	document.querySelector("#loginFormContent").addEventListener("submit", function (event) {
+	  event.preventDefault();
+	  const username = document.querySelector("#username").value;
+	  const password = document.querySelector("#password").value;
+
+	  // Simulate user authentication
+	  const user = users.find((user) => user.username === username && user.password === password);
+
+	  if (user) {
+		currentUser = user;
+		updateHeader();
+		closeForm();
+	  } else {
+		alert("Invalid username or password.");
+	  }
+	}); 
+	
+	
+	
+</script>
+
+
+    <!-- home-->
+    <section class="home" id="home">
+      <div class="text">
+        <h1><span>Travel</span><br />from point<br />A to Z</h1>
+        <p>
+          Choose the enviornmental conscious<br />way with us at AZoom. Because
+          we care
+        </p>
+        <div class="app-stores">
+          <img src="img/ios.png" alt="" />
+          <img src="img/512x512.png" alt="" />
+        </div>
+      </div>
+
+      
+    </section>
+	
+	
+	
+    <!--about -->
+    <section class="about" id="about">
+      <div class="heading">
+        <span>About Us</span>
+        <h1>Going <span>Green</span> with EV</h1>
+      </div>
+      <div class="about-container">
+        <div class="about-img">
+          <img src="img/about.jpg" alt="" />
+        </div>
+        <div class="about-text">
+          <span>AZoom Car Rental</span>
+          <p>
+            AZoom Car Rental specializes in providing electric car rentals to the general public. 
+			We have an appealing selection of electric vehicles to meet a variety of needs and occasions for our customers.
+            Customers who are concerned about the environment.
+          </p>
+          <p>
+            By choosing to drive an EV, you are helping to reduce harmful air pollution caused by exhaust emissions. 
+			An electric car emits no greenhouse gases because its motor is powered by a battery rather than burning fuel. 
+			It also necessitates fewer of the more hazardous, contaminating liquids such as engine oil and coolant fluids.
+          </p>
+          <a href="#" class="btn">Learn More</a>
+        </div>
+      </div>
+    </section>
+    <!--ride-->
+    <section class="ride" id="ride">
+      <div class="heading">
+        <span>How It Works</span>
+        <h1>Rent With 3 Easy Steps</h1>
+      </div>
+      <div class="ride-container">
+        <div class="box">
+          <i class="bx bxs-map"></i>
+          <h2>Pick A Location</h2>
+          <p>
+            AZoom Car Rental has two branches located in town and you will be
+            able to pick up the reserved car and return the car at a designated
+            car park.
+          </p>
+        </div>
+
+        <div class="box">
+          <i class="bx bx-car"></i>
+          <h2>Choose Your Ride</h2>
+          <p>
+            Choose from our range of electric cars available for your
+            transportation needs. No matter the occasion, we got you covered.
+          </p>
+        </div>
+
+        <div class="box">
+          <i class="bx bx-calendar-star"></i>
+          <h2>Reserve To Confirm</h2>
+          <p>
+            Once you have selected your vehicle of choice, you may choose a date
+            to rent. The rental period can be daily, weekly or monthly depending
+            on your needs.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- services-->
+    <section class="services" id="services">
+      <div class="heading">
+        <span>Best Services</span>
+        <h1>
+          Explore Our Top Deals <br />
+          From Top Rated Dealers
+        </h1>
+      </div>
+      <div class="services-container">
+        <div class="box">
+          <div class="box-img">
+            <img src="img/Nissan.jpg" alt="" data-car="Nissan LEAF"/>
+          </div>
+          <p>2018</p>
+          <h3>Nissan LEAF</h3>
+          <a href="checkout.html?car=Nissan%20LEAF&carImage=img/Nissan.jpg" class="btn" onclick="rentCar('Nissan LEAF')">Rent Now</a>
+        </div>
+
+        <div class="box">
+          <div class="box-img">
+            <img src="img/Honda.jpg" alt="" data-car="Honda e(ZC7)" />
+          </div>
+          <p>2020</p>
+          <h3>Honda e(ZC7)</h3>
+          <a href="checkout.html?car=Honda%20e(ZC7)&carImage=img/Honda.jpg" class="btn" onclick="rentCar('Honda e(ZC7)')">Rent Now</a>
+        </div>
+
+        <div class="box">
+          <div class="box-img">
+            <img src="img/Porsche.jpg" alt="" data-car="Porsche Taycan" />
+          </div>
+          <p>2020</p>
+          <h3>Porsche Taycan</h3>
+          <a href="checkout.html?car=Porsche%20Taycan&carImage=img/Porsche.jpg" class="btn" onclick="rentCar('Porsche Taycan')">Rent Now</a>
+        </div>
+
+        <div class="box">
+          <div class="box-img">
+            <img src="img/hyundai.jpg" alt="" data-car="Hyundai Kona Electri"/>
+          </div>
+          <p>2019</p>
+          <h3>Hyundai Kona Electric</h3>
+          <a href="checkout.html?car=Hyundai%20Kona%20Electric&carImage=img/hyundai.jpg" class="btn" onclick="rentCar('Hyundai Kona Electric')">Rent Now</a>
+        </div>
+
+        <div class="box">
+          <div class="box-img">
+            <img src="img/Renault.jpg" alt="" data-car="Renault Zoe"/>
+          </div>
+          <p>2020</p>
+          <h3>Renault Zoe</h3>
+          <a href="checkout.html?car=Renault%20Zoe&carImage=img/Renault.jpg" class="btn" onclick="rentCar('Renault Zoe')">Rent Now</a>
+        </div>
+
+        <div class="box">
+          <div class="box-img">
+            <img src="img/tesla.jpg" alt="" data-car="Tesla Model 3"/>
+          </div>
+          <p>2019</p>
+          <h3>Tesla Model 3</h3>
+          <a href="checkout.html?car=Tesla%20Model%203&carImage=img/tesla.jpg" class="btn" onclick="rentCar('Tesla Model 3')">Rent Now</a>
+        </div>
+
+        <div class="box">
+          <div class="box-img">
+            <img src="img/hyundai1.jpg" alt="" data-car="Hyundai Ioniq"/>
+          </div>
+          <p>2020</p>
+          <h3>Hyundai Ioniq</h3>
+          <a href="checkout.html?car=Hyundai%20Ioniq&carImage=img/hyundai1.jpg" class="btn" onclick="rentCar('Hyundai Ioniq')">Rent Now</a>
+        </div>
+
+        <div class="box">
+          <div class="box-img">
+            <img src="img/tesla.jpeg" alt=""data-car="Tesla Model Y" />
+          </div>
+          <p>2023</p>
+          <h3>Tesla Model Y</h3>
+          <a href="checkout.html?car=Tesla%20Model%20Y&carImage=img/tesla.jpeg" class="btn" onclick="rentCar('Tesla Model Y')">Rent Now</a>
+        </div>
+		
+		<div class="box">
+          <div class="box-img">
+            <img src="img/BMW.jpeg" alt="" data-car="BMW i3" />
+          </div>
+          <p>2022</p>
+          <h3>BMW i3</h3>
+          <a href="checkout.html?car=BMW%20i3&carImage=img/BMW.jpg" class="btn" onclick="rentCar('BMW i3')">Rent Now</a>
+        </div>
+		
+		<div class="box">
+          <div class="box-img">
+            <img src="img/BYD.jpg" alt="" data-car="BYD e6"/>
+          </div>
+          <p>2023</p>
+          <h3>BYD e6</h3>
+          <a href="checkout.html?car=BYD%20e6&carImage=img/BYD.jpg" class="btn" onclick="rentCar('BYD e6')">Rent Now</a>
+        </div>
+		
+		<div class="box">
+          <div class="box-img">
+            <img src="img/MG.jpg" alt="" data-car="MG ZS" />
+          </div>
+          <p>2023</p>
+          <h3>MG ZS</h3>
+          <a href="checkout.html?car=MG%20ZS&carImage=img/MG.jpg" class="btn" onclick="rentCar('MG ZS')">Rent Now</a>
+        </div>
+      </div>
+    </section>
+	
+	
+  <script>
+  // Function to update the car name in the listing
+  function updateCarName() {
+  
+    // Get the selected car model from the <select>
+    const selectedCar = document.getElementById("car").value;
+
+    // Update the car name in the car listing
+    document.getElementById("carName").textContent = selectedCar;
+  }
+
+  // Function to generate the checkout URL
+  function rentCar(carName) {
+    // Capture the selected car's image URL
+    const carImage = document.querySelector(`[data-car="${carName}"]`);
+    const carImageURL = carImage.getAttribute("src");
+
+
+    const checkoutURL = `checkout.html?car=${carName}&carImage=${carImageURL}`;
+
+    // Redirect to the checkout page
+    window.location.href = checkoutURL;
+  }
+</script>
+    <!--reviews-->
+    <section class="reviews" id="reviews">
+      <div class="heading">
+        <span>Reviews</span>
+        <h1>Our Customers Experience</h1>
+      </div>
+      <div class="reviews-container">
+        <div class="box">
+          <div class="rev-img">
+            <img src="img/rev1.jpg" alt="" />
+          </div>
+          <h2>Lee Hsien Loong</h2>
+          <div class="stars">
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+          </div>
+          <p>
+            My recent electric vehicle (EV) rental experience with AZoom was nothing short of exceptional. 
+			I was keen on reducing my carbon footprint, and they provided the perfect solution.
+			Here's why I highly recommend them:
+			1.Eco-Friendly Fleet: AZoom has a fantastic selection of electric vehicles, perfect for environmentally conscious travelers like me. 
+			Renting an EV was not only a green choice but also a practical one with their charging infrastructure.
+			2.Seamless Charging: Charging an EV can be a concern for some, but AZoom made it hassle-free.
+			They provided helpful information about nearby charging stations and even equipped the vehicle with a full charge at pick-up.
+			3.Cost-Effective: Not only did I reduce my carbon footprint, but I also saved on fuel costs. 
+			EVs are highly efficient, and the rental rates at AZoom were reasonable.
+			In summary, AZoom offers a fantastic EV rental service that blends environmental responsibility with convenience. 
+			If you're looking for an eco-conscious way to travel, I highly recommend them.
+          </p>
+        </div>
+
+        <div class="box">
+          <div class="rev-img">
+            <img src="img/rev2.jpg" alt="" />
+          </div>
+          <h2>Lawrence Wong</h2>
+          <div class="stars">
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star-half"></i>
+          </div>
+          <p>
+            I recently rented an electric vehicle from AZoom, and it was a refreshing change from traditional car rentals. 
+			Here's what I appreciated about my EV rental experience:
+			1. Eco-Friendly Fleet: AZoom had a decent selection of electric vehicles, allowing me to make an environmentally responsible choice. 
+			It felt good to reduce my carbon footprint during my trip.
+			2. Charging Support: The rental came with detailed information about nearby charging stations, making it convenient to plan my routes. 
+			They also provided a fully charged EV at pick-up, which was a thoughtful touch.
+			3. Fuel Savings: Renting an electric vehicle was not only eco-friendly but also cost-effective. 
+			EVs are known for their energy efficiency, and I noticed the savings on my travel expenses.
+			4. Responsive Customer Service: The staff was friendly and willing to help with any questions I had about EVs. 
+			They made me feel at ease with this new way of traveling.
+			While I had a positive experience with AZoom, I believe there's room for improvement in expanding their EV fleet options to cater to various preferences and budgets.
+          </p>
+        </div>
+
+        <div class="box">
+          <div class="rev-img">
+            <img src="img/rev3.jpg" alt="" />
+          </div>
+          <h2>Josephine Teo</h2>
+          <div class="stars">
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+            <i class="bx bxs-star"></i>
+          </div>
+          <p>
+            My recent electric vehicle (EV) rental with AZoom was an electrifying adventure that exceeded my expectations. 
+			Here's why I'm thrilled with their EV rental service:
+			1. Diverse EV Options: AZoom offers a fantastic range of electric vehicles, ensuring I could choose the perfect EV for my trip.
+			I was spoiled for choice, from compact EVs to spacious electric SUVs.
+			2. Charging Convenience: They provided all the information I needed about charging stations, so I never had to worry about running out of power. 
+			The fully charged EV at pick-up was a thoughtful touch.
+			3. Economical Travel: Renting an EV not only reduced my carbon footprint but also saved me money on fuel. 
+			EVs are incredibly energy-efficient, and I noticed a significant difference in my travel expenses.
+			In summary, if you're looking to embark on an eco-friendly adventure, I wholeheartedly recommend renting an EV from AZoom. 
+			Their service, vehicle selection, and commitment to sustainability make them stand out in the world of car rentals.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!--locate -->
+    <section class="locate" id="locate">
+      <div class="heading">
+        <h1>Locate Us</h1>
+      </div>
+      <div class="locate-container">
+        <div class="clementi">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1994.3846836213957!2d103.76193931677221!3d1.3138585784752352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1a8df09c2e33%3A0xcd5d745bda41784d!2sWan%20Ngian%20Choon%20Medical%20Hall%20%26%20Trading!5e0!3m2!1sen!2ssg!4v1666954834188!5m2!1sen!2ssg"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <div class="clementi-text">
+          <span>AZoom Car Rental: Clementi</span>
+          <p>
+            Address: 432 Clementi Ave 3, Singapore 120432 <br />Opening
+            Days:Monday to Sunday, except Public Holidays <br />Opening Hours:
+            10am to 10pm <br />Tel: +65 6215 9402
+          </p>
+        </div>
+        <div class="paya-lebar">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7645281384025!2d103.88972200252995!3d1.3168858168991022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x649068b0ecabb2cb!2zMcKwMTknMTIuMyJOIDEwM8KwNTMnMzYuNyJF!5e0!3m2!1sen!2ssg!4v1666955442573!5m2!1sen!2ssg"
+            width="600"
+            height="450"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <div class="paya-lebar-text">
+          <span>AZoom Car Rental: Paya Lebar</span>
+          <p>
+            Address: 801 Geylang Ave 5, Singapore 409801 <br />Opening
+            Days:Monday to Sunday, except Public Holidays <br />Opening Hours:
+            10am to 10pm <br />Tel: +65 6215 9524
+          </p>
+        </div>
+      </div>
+    </section>
+    <!--newsletter-->
+    <section class="newsletter">
+      <h2>Subscribe To Newsletter</h2>
+      <div class="box">
+        <input type="text" placeholder="Enter Your Email..." />
+        <a href="#" class="btn">Subscribe</a>
+      </div>
+    </section>
+    <section class="footer">
+      <div class="footer-container container">
+        <div class="footer-box">
+          <a href="#" class="logo">Car<span>Point</span></a>
+          <div class="social">
+            <a href="#"><i class="bx bxl-facebook"></i></a>
+            <a href="#"><i class="bx bxl-twitter"></i></a>
+            <a href="#"><i class="bx bxl-instagram"></i></a>
+            <a href="#"><i class="bx bxl-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-box">
+          <h3>Page</h3>
+          <a href="#">Home</a>
+          <a href="#">About</a>
+          <a href="#">Ride</a>
+          <a href="#">Services</a>
+          <a href="#">Reviews</a>
+        </div>
+        <div class="footer-box">
+          <h3>Legal</h3>
+          <a href="#">Privacy</a>
+          <a href="#">Refund Policy</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+        <div class="footer-box">
+          <h3>Contact</h3>
+          <span>Paya Lebar</span>
+          <span>Clementi</span>
+        </div>
+      </div>
+    </section>
+
+    <!--scrollreveal-->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- Link to JS-->
+    <script src="main.js"></script>
+  </body>
+</html>

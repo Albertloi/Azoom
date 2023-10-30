@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="payment.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3>Summary</h3>
+        <p>Car Name: <span id="summaryCarName"></span></p>
+        <p>Due Date: <span id="dueDate"></span></p>
+					<button id="pay" class="btn">Return Vehicle</button>
+    </div>
+    <script>
+        // Function to retrieve query parameters from the URL
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Retrieve carName and dueDate from query parameters
+        const carName = getQueryParam("carName");
+        const dueDate = getQueryParam("dueDate");
+
+        // Display the carName and dueDate on the page
+        document.getElementById("summaryCarName").textContent = carName;
+        document.getElementById("dueDate").textContent = dueDate;
+		
+				// Event listener for payment button
+document.getElementById("pay").addEventListener("click", function () {
+    const paymentConfirmed = window.confirm("Return was successful. Click OK to close.");
+    if (paymentConfirmed) {
+        // Close the col-75 section
+        window.location.href = 'index.html';
+    }
+});
+    </script>
+</body>
+</html>
